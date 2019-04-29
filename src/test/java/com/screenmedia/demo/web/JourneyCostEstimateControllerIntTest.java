@@ -32,16 +32,16 @@ public class JourneyCostEstimateControllerIntTest {
 
 		HttpEntity<String> headers = new HttpEntity<>(null, new HttpHeaders());
 
-		ResponseEntity<JourneyCostEstimation> response = testRestTemplate.exchange(getBaseUri() + "/10042019/petrol/10/10",
+		ResponseEntity<JourneyCostEstimation> response = testRestTemplate.exchange(getBaseUri() + "/01012019/petrol/30/250",
 				HttpMethod.GET, headers, JourneyCostEstimation.class);
 
 		Assertions.assertThat(response).isNotNull();
 		JourneyCostEstimation responseEntity = response.getBody();
 		Assertions.assertThat(responseEntity).isNotNull();
-		Assertions.assertThat(responseEntity.getFuelCostOfTheJourney()).isEqualTo("£5.58");
-		Assertions.assertThat(responseEntity.getDutyPaidForJourney()).isEqualTo("£2.63");
+		Assertions.assertThat(responseEntity.getFuelCostOfTheJourney()).isEqualTo("£45.51");
+		Assertions.assertThat(responseEntity.getDutyPaidForJourney()).isEqualTo("£21.95");
 		Assertions.assertThat(responseEntity.getJourneyCostSummaryMsg())
-				.isEqualTo("The journey cost is 12p more expensive if the journey would be today");
+				.isEqualTo("The journey cost is £1.99 more expensive if the journey would be today");
 
 		// TODO: Extra care needs to be taken with the last assertion as the cost
 		// difference will change as the time progress. It can be done by setting

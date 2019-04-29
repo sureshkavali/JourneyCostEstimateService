@@ -38,9 +38,11 @@ The RESTFul service to provide cost of a journey given the date of journey, fuel
 - Alternatively the application can be tested using tools like postman or from linux command line use cURL command.
 
 ## How to test the solution from publicly hosted server
-- Access the url https://sbksamplespringbootapp.cfapps.io/journeycost/{date}/{fuelType}/{mpg}/{mileage}
+- The application has been deployed to Cloud Foundry
+- Access the url https://journeycostestimateserviceapp.cfapps.io/journeycost/{date}/{fuelType}/{mpg}/{mileage}
+- - eg., Try the url https://journeycostestimateserviceapp.cfapps.io/journeycost/01012019/petrol/30/250
 - All the placeholders are mandatory, missing value for any placeholder will result in 404 error.
 ## Additional comments
 - The application behaves as expected in majority of scenarios. However this is not a full solution and there may be some gaps like handling of path parameter validation or intelligently handling the value of fuel type is kept outside scope.
-- BigDecimal has been used to do the calculation as it is best suited for the scenario. However Rounding values has been left to default behaviour as it is something decided by business. So if the value returned varies by 0.01 pence at times.
+- BigDecimal has been used to do the calculation as it is best suited for the scenario. However Rounding values has been left to default behaviour in most places and scaled 2 digits with Rounding Up mode where required. So if the value returned varies by 0.01 pence at times.
 - Uploading rates file every week requires manual intervension. It would be nice to automate the process.  

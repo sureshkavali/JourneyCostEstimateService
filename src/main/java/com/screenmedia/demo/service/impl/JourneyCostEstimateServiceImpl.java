@@ -1,13 +1,13 @@
 package com.screenmedia.demo.service.impl;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.screenmedia.demo.data.FuelPricesDataForDate;
 import com.screenmedia.demo.data.JourneyCostEstimation;
@@ -54,15 +54,15 @@ public class JourneyCostEstimateServiceImpl implements JourneyCostEstimateServic
 
 		switch (fuelType) {
 		case "diesel":
-			journeyFuelCost = mileage.divide(mpg).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getUlsdPrice());
-			dutyPaidOnjourney = mileage.divide(mpg).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getDutyOnUlsd());
-			todaysJourneyFuelCost = mileage.divide(mpg).multiply(GAL_TO_LTR)
+			journeyFuelCost = mileage.divide(mpg, 2, RoundingMode.HALF_UP).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getUlsdPrice());
+			dutyPaidOnjourney = mileage.divide(mpg, 2, RoundingMode.HALF_UP).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getDutyOnUlsd());
+			todaysJourneyFuelCost = mileage.divide(mpg, 2, RoundingMode.HALF_UP).multiply(GAL_TO_LTR)
 					.multiply(fuelPriceDataForToday.getUlsdPrice());
 			break;
 		case "petrol":
-			journeyFuelCost = mileage.divide(mpg).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getUlspPrice());
-			dutyPaidOnjourney = mileage.divide(mpg).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getDutyOnUlsp());
-			todaysJourneyFuelCost = mileage.divide(mpg).multiply(GAL_TO_LTR)
+			journeyFuelCost = mileage.divide(mpg, 2, RoundingMode.HALF_UP).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getUlspPrice());
+			dutyPaidOnjourney = mileage.divide(mpg, 2, RoundingMode.HALF_UP).multiply(GAL_TO_LTR).multiply(fuelPriceDataForDate.getDutyOnUlsp());
+			todaysJourneyFuelCost = mileage.divide(mpg, 2, RoundingMode.HALF_UP).multiply(GAL_TO_LTR)
 					.multiply(fuelPriceDataForToday.getUlspPrice());
 			break;
 		default:
