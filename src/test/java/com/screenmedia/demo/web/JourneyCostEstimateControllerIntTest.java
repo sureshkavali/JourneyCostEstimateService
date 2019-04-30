@@ -10,6 +10,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,6 +37,7 @@ public class JourneyCostEstimateControllerIntTest {
 				HttpMethod.GET, headers, JourneyCostEstimation.class);
 
 		Assertions.assertThat(response).isNotNull();
+		Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		JourneyCostEstimation responseEntity = response.getBody();
 		Assertions.assertThat(responseEntity).isNotNull();
 		Assertions.assertThat(responseEntity.getFuelCostOfTheJourney()).isEqualTo("£45.51");
@@ -57,6 +59,7 @@ public class JourneyCostEstimateControllerIntTest {
 				HttpMethod.GET, headers, ErrorResponse.class);
 
 		Assertions.assertThat(response).isNotNull();
+		Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 		ErrorResponse responseEntity = response.getBody();
 		Assertions.assertThat(responseEntity).isNotNull();
 		Assertions.assertThat(responseEntity.getCode()).isEqualTo(400);
